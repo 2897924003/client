@@ -1,0 +1,14 @@
+{
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "dest": "/index.html" }
+  ],
+
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://smooth-werewolf-rich.ngrok-free.app/:path*"
+    }
+  ]
+
+}

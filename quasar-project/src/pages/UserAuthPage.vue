@@ -73,7 +73,7 @@ const rows = ref([]);
 
 onMounted(async () => {
   const response = await axios.post(
-    "api/get_rows",
+    "https://smooth-werewolf-rich.ngrok-free.app/get_rows",
     { username: "admin", password: "123456" },
     {
       headers: {

@@ -13,7 +13,7 @@ const authStore = useAuthStore();
 
 const login = async () => {
   const response = await axios.post(
-    "api/client-login",
+    "https://smooth-werewolf-rich.ngrok-free.app/client-login",
     { username: username.value, password: password.value },
     {
       headers: {
@@ -47,7 +47,7 @@ const login = async () => {
 
 const register = async () => {
   const response = await axios.post(
-    "api/client-register",
+    "https://smooth-werewolf-rich.ngrok-free.app/client-register",
     { username: username.value, password: password.value },
     {
       headers: {

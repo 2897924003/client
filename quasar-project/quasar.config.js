@@ -14,7 +14,7 @@ export default configure((ctx) => {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
-    boot: ["i18n", "axios","my_auth"],
+    boot: ["i18n", "axios", "my_auth"],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: ["app.scss"],
@@ -90,13 +90,13 @@ export default configure((ctx) => {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
-      https: true,
+      https: false,
       proxy: {
-        "/api": {
-          target: "https://smooth-werewolf-rich.ngrok-free.app/",
+        /* "/api": {
+          target: "https://smooth-werewolf-rich.ngrok-free.app",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
-        },
+        },*/
       },
       open: true, // opens browser window automatically
     },

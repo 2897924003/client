@@ -190,7 +190,7 @@ watch(model, (newValue, oldValue) => {
 /*---------------------*/
 /*退出登录*/
 const logout = () => {
-  const response = axios.get("/api/logout");
+  const response = axios.get("https://smooth-werewolf-rich.ngrok-free.app/api/logout");
   authStore.logout();
   $q.notify({
     message: "退出登录成功",

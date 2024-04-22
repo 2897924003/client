@@ -1,4 +1,5 @@
 <template>
+
   <q-page class="flex flex-center">
     <img
       alt="EMT"
@@ -11,51 +12,24 @@
       src="/icons/aa6db5eb6683c407721d725ee87ad118.jpg"
     ></q-img>
 
-    <p v-for="n in 15" :key="n">随机字</p>
+    <q-btn @click="hello">测试按钮</q-btn>
 
-    <div class="q-pa-md">
-      <q-card class="my-card">
-        <q-parallax
-          src="/icons/aa6db5eb6683c407721d725ee87ad118.jpg"
-          :height="150"
-        />
-
-        <q-card-section>
-          这是一张小卡片:
-          <p>规则1:当你看到这张卡片不要惊讶,立马让他消失</p>
-          <q-separator></q-separator>
-          <p>规则2:如果无法让他消失,请尝试找到第二张小卡片,记住,这不是第一张</p>
-
-          <q-card-actions align="around">
-            <q-btn flat>Action 1</q-btn>
-            <q-btn flat>Action 2</q-btn>
-          </q-card-actions>
-        </q-card-section>
-      </q-card>
-    </div>
-
-    <q-card
-      class="my-card"
-      style="background: radial-gradient(circle, #35a2ff 0%, #014a88 100%)"
-    >
-      <q-card-section>
-        <q-video src="https://www.youtube.com/embed/k3_tw44QsZQ?rel=0" />
-
-        这是一张小卡片:
-        <p>规则1:当你看到这张卡片不要惊讶,立马让他消失</p>
-        <q-separator></q-separator>
-        <p>规则2:如果无法让他消失,请尝试找到第二张小卡片,记住,这不是第一张</p>
-
-        <q-card-actions align="around">
-          <q-btn flat>Action 1</q-btn>
-          <q-btn flat>Action 2</q-btn>
-        </q-card-actions>
-      </q-card-section>
-    </q-card>
   </q-page>
 </template>
 
-<script setup></script>
+<script setup>
+import axios from "axios";
+const hello = async()=>{
+  const response  = await axios.get("https://smooth-werewolf-rich.ngrok-free.app/api/hello",
+    {
+      headers:{
+        "Authorization": sessionStorage.getItem("jwt")
+      }
+  })
+  alert(response.data)
+}
+
+</script>
 
 <style lang="sass" scoped>
 .my-card

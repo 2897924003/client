@@ -10,10 +10,14 @@ const username = ref(null);
 const password = ref(null);
 const $router = useRouter();
 const authStore = useAuthStore();
+const rememberMe = ref(false);
+
+
 const login = async () => {
+
   const response = await axios.post(
     "https://smooth-werewolf-rich.ngrok-free.app/api/client-login",
-    { username: username.value, password: password.value },
+    { username: username.value, password: password.value, "remember-me": rememberMe.value?"on":"off"},
     {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -22,6 +26,8 @@ const login = async () => {
   );
 
   if (response.data.code === 1) {
+    // 将JWT令牌存入会话存储
+    sessionStorage.setItem('jwt', response.headers.getAuthorization());
     $q.notify({
       message: "欢迎!",
       position: "top",
@@ -47,7 +53,7 @@ const login = async () => {
 const register = async () => {
   const response = await axios.post(
     "https://smooth-werewolf-rich.ngrok-free.app/api/client-register",
-    { username: username.value, password: password.value },
+    { username: username.value, password: password.value},
     {
       headers: {
         "Content-Type": "application/json",
@@ -106,6 +112,12 @@ const register = async () => {
             <div class="row justify-around">
               <q-btn label="登录" type="login" color="blue" />
               <q-btn label="注册" @click="register" color="blue" />
+              <q-checkbox
+                label="记住密码"
+                checked-icon="star"
+                unchecked-icon="star_border"
+                v-model="rememberMe"
+              />
             </div>
           </q-form>
         </div>

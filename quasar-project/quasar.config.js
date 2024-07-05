@@ -3,8 +3,8 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-import { configure } from "quasar/wrappers";
-import { fileURLToPath } from "node:url";
+import {configure} from "quasar/wrappers";
+import {fileURLToPath} from "node:url";
 
 export default configure((ctx) => {
   return {
@@ -23,7 +23,7 @@ export default configure((ctx) => {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v7',
-      // 'fontawesome-v6',
+      'fontawesome-v6',
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -92,11 +92,10 @@ export default configure((ctx) => {
     devServer: {
       https: false,
       proxy: {
-        /* "/api": {
-          target: "https://smooth-werewolf-rich.ngrok-free.app",
+        "/api": {
+          target: "https://test.opensun.asia/",
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ""),
-        },*/
+        },
       },
       open: true, // opens browser window automatically
     },
@@ -105,6 +104,7 @@ export default configure((ctx) => {
     framework: {
       config: {
         notify: {},
+        loadingBar:{}
       },
 
       // iconSet: 'material-icons', // Quasar icon set
@@ -118,7 +118,7 @@ export default configure((ctx) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: ["Notify"],
+      plugins: ['Notify','LoadingBar','LocalStorage', 'SessionStorage','Meta'],
     },
 
     animations: "all", // --- includes all animations

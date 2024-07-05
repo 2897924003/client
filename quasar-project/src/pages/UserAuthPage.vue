@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import {onMounted, ref} from "vue";
 import axios from "axios";
 // 定义表格列
 const columns = [
@@ -70,10 +70,10 @@ const columns = [
   },
 ];
 const rows = ref([]);
-
+/*查询用户信息*/
 onMounted(async () => {
   const response = await axios.post(
-    "https://smooth-werewolf-rich.ngrok-free.app/api/get_rows",
+    "https://test.opensun.asia/api/authentication/user_infos",
     {
 
     },
@@ -167,8 +167,9 @@ const getSelectedString = () => {
           <q-input
             borderless
             dense
-            debounce="300"
+            debounce="500"
             v-model="filter"
+            hint="Debouncing 500ms"
             placeholder="Search"
           >
             <template v-slot:append>

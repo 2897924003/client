@@ -2,7 +2,7 @@
   "name": "quasar-project",
   "version": "0.0.1",
   "description": "我的第一个前端项目",
-  "productName": "Quasar App",
+  "productName": "opensun",
   "author": "GJQHR <2897924003@qq.com>",
   "type": "module",
   "private": true,
@@ -16,6 +16,7 @@
   "dependencies": {
     "@quasar/extras": "^1.16.4",
     "axios": "^1.2.1",
+    "layouts": "^3.0.2",
     "pinia": "^2.0.11",
     "quasar": "^2.6.0",
     "quasar-project": "^0.0.1",

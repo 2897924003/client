@@ -1,17 +1,11 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header class="bg-black">
-      <!--      <div>
-              <q-btn round :loading = "flag"  @click="changeflag" color="black" icon="camera_rear">
-                <template v-slot:loading>
-                  <q-spinner-gears />
-                </template>
-              </q-btn>
-            </div>-->
 
       <q-toolbar class="row justify-between">
+
         <div class="flex">
-          <q-toolbar-title>资源小屋</q-toolbar-title>
+          <q-toolbar-title>OpenSun</q-toolbar-title>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
         </div>
         <div class="flex">
@@ -23,7 +17,16 @@
           ></q-btn>
         </div>
 
-        <div class="q-pa-md q-gutter-md">
+        <div class="q-pa-md q-gutter-sm">
+          <q-breadcrumbs>
+            <q-breadcrumbs-el icon="home" to="/" />
+            <q-breadcrumbs-el label="Docs" icon="widgets" to="/start/pick-quasar-flavour" />
+            <q-breadcrumbs-el label="Breadcrumbs" icon="navigation" to="/vue-components/breadcrumbs" />
+            <q-breadcrumbs-el label="Build" icon="build" />
+          </q-breadcrumbs>
+        </div>
+        <div class
+               ="q-pa-md q-gutter-md">
           <q-btn-toggle
             v-model="model"
             push
@@ -35,6 +38,8 @@
             ]"
           />
         </div>
+
+
       </q-toolbar>
     </q-header>
 
@@ -50,12 +55,12 @@
     >
       <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
         <q-list padding>
+
           <router-link to="/mainlayout">
             <q-item clickable v-ripple>
               <q-item-section avatar>
                 <q-img src="/icons/img.png" />
               </q-item-section>
-
               <q-item-section> 首页 </q-item-section>
             </q-item>
           </router-link>
@@ -93,10 +98,29 @@
               </q-item-section>
 
               <q-item-section class="text-red-10 bg-yellow">
-                用户管理模块
+                用户管理
               </q-item-section>
             </q-item>
           </router-link>
+
+          <router-link to="studentinfopage">
+            <q-item clickable v-ripple>
+              <q-item-section>
+                班级管理
+              </q-item-section>
+            </q-item>
+          </router-link>
+
+          <router-link to="examplepage">
+            <q-item clickable v-ripple>
+              <q-item-section>
+                建筑图纸
+              </q-item-section>
+            </q-item>
+          </router-link>
+
+
+
         </q-list>
       </q-scroll-area>
     </q-drawer>
@@ -116,10 +140,10 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router";
-import { ref, watch } from "vue";
-import { useQuasar } from "quasar";
-import { useAuthStore } from "stores/auth";
+import {useRouter} from "vue-router";
+import {ref, watch} from "vue";
+import {useQuasar} from "quasar";
+import {useAuthStore} from "stores/auth";
 import axios from "axios";
 
 const $q = useQuasar();

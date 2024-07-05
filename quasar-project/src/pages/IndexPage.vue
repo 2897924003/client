@@ -1,38 +1,91 @@
 <template>
+  <q-page class="column flex flex-center q-gutter-sm">
+      <!-- Header Image -->
+    <div>
+    <q-card class="fit column flex flex-center q-gutter-sm">
+      <q-img src="/icons/eye.png"></q-img>
 
-  <q-page class="flex flex-center">
-    <img
-      alt="EMT"
-      src="/icons/wallhaven-73r66e.png"
-      style="max-width: 100%; max-height: 100%"
-    />
+      <div class="text-h6 text-center">Typology of Chinese countryside self built house</div>
 
-    <q-img
-      style="max-width: 100%; max-height: 100%"
-      src="/icons/aa6db5eb6683c407721d725ee87ad118.jpg"
-    ></q-img>
+      <div class="row flex q-gutter-sm justify-center">
+        <!-- Two Floors Card -->
+        <q-card class="col-5 cursor-pointer" @click="showSubcategories('twoFloors')">
+          <q-card-section>
+            <q-img src="/icons/twofloor.png"></q-img>
+          </q-card-section>
+          <q-card-section class="text">
+            <strong>Two floors:</strong>
+            New Chinese style/ European style/ Nordic style /Modern style
+          </q-card-section>
+        </q-card>
 
-    <q-btn @click="hello">测试按钮</q-btn>
+        <!-- Three Floors Card -->
+        <q-card class="col-5 cursor-pointer" @click="showSubcategories('threeFloors')">
+          <q-card-section>
+            <q-img src="/icons/threefloor.png"></q-img>
+          </q-card-section>
+          <q-card-section class="text">
+            <strong>Three floors:</strong>
+            Chinese style/New Chinese style/European style/Simple style
+          </q-card-section>
+        </q-card>
+      </div>
 
+    </q-card>
+    </div>
+
+
+
+
+    <!-- Dialog for Subcategories -->
+    <q-dialog v-model="dialogVisible" transition-show="rotate" transition-hide="rotate">
+      <q-card >
+        <q-card-section>
+          <div class="text-h6">Subcategories</div>
+        </q-card-section>
+        <q-separator />
+        <q-card-section v-if="currentCategory === 'twoFloors'">
+          <!-- Add subcategories for Two Floors here -->
+          <q-card-actions
+            class="q-gutter-md justify-around row flex flex-center"
+          >
+            <q-btn label="New Chinese Style" to="examplepage" class="col-2"></q-btn>
+            <q-btn label="European style" to="examplepage" class="col-2"></q-btn>
+            <q-btn label="Nordic style" to="examplepage" class="col-2"></q-btn>
+            <q-btn label="modern style" to="examplepage" class="col-2"></q-btn>
+          </q-card-actions>
+        </q-card-section>
+
+        <q-card-section v-else-if="currentCategory === 'threeFloors'">
+          <!-- Add subcategories for Three Floors here -->
+          <q-card-actions
+            class="q-gutter-md justify-around row flex flex-center"
+          >
+            <q-btn label="New Chinese Style" to="examplepage" class="col-2"></q-btn>
+            <q-btn label="European style" to="examplepage" class="col-2"></q-btn>
+            <q-btn label="Nordic style" to="examplepage" class="col-2"></q-btn>
+            <q-btn label="modern style" to="examplepage" class="col-2"></q-btn>
+          </q-card-actions>
+        </q-card-section>
+
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
-<script setup>
-import axios from "axios";
-const hello = async()=>{
-  const response  = await axios.get("https://smooth-werewolf-rich.ngrok-free.app/api/hello",
-    {
-      headers:{
-        "Authorization": sessionStorage.getItem("jwt")
-      }
-  })
-  alert(response.data)
-}
-
+<script>
+export default {
+  data() {
+    return {
+      dialogVisible: false,
+      currentCategory: ''
+    };
+  },
+  methods: {
+    showSubcategories(category) {
+      this.currentCategory = category;
+      this.dialogVisible = true;
+    }
+  }
+};
 </script>
-
-<style lang="sass" scoped>
-.my-card
-  width: 100%
-  max-width: 500px
-</style>

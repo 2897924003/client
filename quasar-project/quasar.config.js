@@ -89,6 +89,7 @@ export default configure((ctx) => {
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
+    //只对本地开发起作用,服务器运行在本机,部署到vercel没用quasar-project/dist/spa
     devServer: {
       https: false,
       proxy: {
@@ -97,7 +98,7 @@ export default configure((ctx) => {
           changeOrigin: true,
         },
       },
-      open: true, // opens browser window automatically
+      open: false, // 自动打开浏览器
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework

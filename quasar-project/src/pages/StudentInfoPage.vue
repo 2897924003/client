@@ -259,7 +259,7 @@ const exportTable = () => {
 const fetchFromServer = async () => {
   try {
     const response = await axios.get(
-      "/api/class/student_infos",
+      "https://test.opensun.asia/api/class/student_infos",
       {
         headers: { Authorization: sessionStorage.getItem("jwt") },
       }

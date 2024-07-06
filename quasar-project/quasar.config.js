@@ -3,8 +3,8 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js
 
-import {configure} from "quasar/wrappers";
-import {fileURLToPath} from "node:url";
+import { configure } from "quasar/wrappers";
+import { fileURLToPath } from "node:url";
 
 export default configure((ctx) => {
   return {
@@ -23,7 +23,7 @@ export default configure((ctx) => {
     extras: [
       // 'ionicons-v4',
       // 'mdi-v7',
-      'fontawesome-v6',
+      "fontawesome-v6",
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -92,20 +92,13 @@ export default configure((ctx) => {
     //只对本地开发起作用,服务器运行在本机,部署到vercel没用quasar-project/dist/spa
     devServer: {
       https: false,
-      proxy: {
-        "/api": {
-          target: "https://test.opensun.asia/",
-          changeOrigin: true,
-        },
-      },
       open: false, // 自动打开浏览器
     },
-
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
       config: {
         notify: {},
-        loadingBar:{}
+        loadingBar: {},
       },
 
       // iconSet: 'material-icons', // Quasar icon set
@@ -119,7 +112,13 @@ export default configure((ctx) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Notify','LoadingBar','LocalStorage', 'SessionStorage','Meta'],
+      plugins: [
+        "Notify",
+        "LoadingBar",
+        "LocalStorage",
+        "SessionStorage",
+        "Meta",
+      ],
     },
 
     animations: "all", // --- includes all animations
@@ -141,10 +140,10 @@ export default configure((ctx) => {
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-ssr/configuring-ssr
     ssr: {
-      prodPort: 3000, // The default port that the production server should use
+      prodPort: 9100, // The default port that the production server should use
       // (gets superseded if process.env.PORT is specified at runtime)
-
       middlewares: [
+        "proxy",
         "render", // keep this as last one
       ],
 

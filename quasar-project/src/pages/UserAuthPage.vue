@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, ref} from "vue";
+import { onMounted, ref } from "vue";
 import axios from "axios";
 // 定义表格列
 const columns = [
@@ -74,12 +74,12 @@ const rows = ref([]);
 onMounted(async () => {
   const response = await axios.post(
     "https://test.opensun.asia/api/authentication/user_infos",
+    {},
     {
-
+      headers: {
+        Authorization: sessionStorage.getItem("jwt"),
+      },
     },
-    { headers: {
-      "Authorization": sessionStorage.getItem("jwt"),
-      } }
   );
   rows.value = response.data.records;
 });

@@ -10,49 +10,47 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref } from "vue";
 
 const nodes = [
   {
-    label: 'Node 1',
+    label: "Node 1",
     children: [
-      { label: 'Node 1.1', lazy: true },
-      { label: 'Node 1.2', lazy: true }
-    ]
+      { label: "Node 1.1", lazy: true },
+      { label: "Node 1.2", lazy: true },
+    ],
   },
   {
-    label: 'Node 2',
-    lazy: true
+    label: "Node 2",
+    lazy: true,
   },
   {
-    label: 'Lazy load empty',
-    lazy: true
+    label: "Lazy load empty",
+    lazy: true,
   },
   {
-    label: 'Node is not expandable',
+    label: "Node is not expandable",
     expandable: false,
-    children: [
-      { label: 'Some node' }
-    ]
-  }
-]
+    children: [{ label: "Some node" }],
+  },
+];
 
 export default {
-  setup () {
+  setup() {
     return {
       lazy: ref(nodes),
 
-      onLazyLoad ({ node, key, done, fail }) {
+      onLazyLoad({ node, key, done, fail }) {
         // call fail() if any error occurs
 
         setTimeout(() => {
           // simulate loading and setting an empty node
-          if (key.indexOf('Lazy load empty') > -1) {
-            done([])
-            return
+          if (key.indexOf("Lazy load empty") > -1) {
+            done([]);
+            return;
           }
 
-          const label = node.label
+          const label = node.label;
           done([
             { label: `${label}.1` },
             { label: `${label}.2`, lazy: true },
@@ -60,13 +58,13 @@ export default {
               label: `${label}.3`,
               children: [
                 { label: `${label}.3.1`, lazy: true },
-                { label: `${label}.3.2`, lazy: true }
-              ]
-            }
-          ])
-        }, 1000)
-      }
-    }
-  }
-}
+                { label: `${label}.3.2`, lazy: true },
+              ],
+            },
+          ]);
+        }, 1000);
+      },
+    };
+  },
+};
 </script>

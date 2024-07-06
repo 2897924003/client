@@ -33,10 +33,8 @@ const routes = [
         meta: { requireAuthenticated: false },
         component: () => import("pages/StudentInfoPage.vue"),
       },
-
     ],
   },
-
 
   /*{
   path: "/class",
@@ -60,7 +58,7 @@ const routes = [
         path: "/examplepage",
         component: () => import("pages/BuildingExample.vue"),
       },
-    ]
+    ],
   },
   {
     path: "/Oauth2WaitingPage",
@@ -76,7 +74,6 @@ const routes = [
     path: "/login",
     redirect: "/",
   },
-
 ];
 
 export default routes;

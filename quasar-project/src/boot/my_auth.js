@@ -1,5 +1,5 @@
-import {boot} from "quasar/wrappers";
-import {useAuthStore} from "stores/auth";
+import { boot } from "quasar/wrappers";
+import { useAuthStore } from "stores/auth";
 
 export default boot(({ router, store, redirect }) => {
   router.beforeEach((to, from, next) => {

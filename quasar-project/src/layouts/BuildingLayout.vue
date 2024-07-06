@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-<!--
+    <!--
     <q-header class="bg-black">
       <q-toolbar class="flex">
 
@@ -25,7 +25,6 @@
     </q-header>
 -->
 
-
     <q-page-container>
       <router-view></router-view>
     </q-page-container>
@@ -33,10 +32,10 @@
 </template>
 
 <script setup>
-import {useRouter} from "vue-router";
-import {ref, watch} from "vue";
-import {useQuasar} from "quasar";
-import {useAuthStore} from "stores/auth";
+import { useRouter } from "vue-router";
+import { ref, watch } from "vue";
+import { useQuasar } from "quasar";
+import { useAuthStore } from "stores/auth";
 import axios from "axios";
 
 const $q = useQuasar();
@@ -47,12 +46,10 @@ const authStore = useAuthStore();
 
 const menuList = [
   {
-
     label: "Inbox",
     separator: true,
   },
   {
-
     label: "Outbox",
     separator: false,
   },
@@ -94,6 +91,4 @@ watch(model, (newValue, oldValue) => {
     $q.dark.set(true);
   }
 });
-
 </script>
-

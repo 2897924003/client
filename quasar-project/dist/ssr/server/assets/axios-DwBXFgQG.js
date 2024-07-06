@@ -1,0 +1,1 @@
+import{boot as a}from"quasar/wrappers/index.mjs";import t from"axios";import{default as l}from"axios";const s=t.create({baseURL:"https://test.opensun.asia:8100"}),r=a(({app:o})=>{o.config.globalProperties.$axios=t,o.config.globalProperties.$api=s});export{s as api,l as axios,r as default};

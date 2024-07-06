@@ -1,9 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header class="bg-black">
-
       <q-toolbar class="row justify-between">
-
         <div class="flex">
           <q-toolbar-title>OpenSun</q-toolbar-title>
           <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
@@ -20,13 +18,20 @@
         <div class="q-pa-md q-gutter-sm">
           <q-breadcrumbs>
             <q-breadcrumbs-el icon="home" to="/" />
-            <q-breadcrumbs-el label="Docs" icon="widgets" to="/start/pick-quasar-flavour" />
-            <q-breadcrumbs-el label="Breadcrumbs" icon="navigation" to="/vue-components/breadcrumbs" />
+            <q-breadcrumbs-el
+              label="Docs"
+              icon="widgets"
+              to="/start/pick-quasar-flavour"
+            />
+            <q-breadcrumbs-el
+              label="Breadcrumbs"
+              icon="navigation"
+              to="/vue-components/breadcrumbs"
+            />
             <q-breadcrumbs-el label="Build" icon="build" />
           </q-breadcrumbs>
         </div>
-        <div class
-               ="q-pa-md q-gutter-md">
+        <div class="q-pa-md q-gutter-md">
           <q-btn-toggle
             v-model="model"
             push
@@ -38,8 +43,6 @@
             ]"
           />
         </div>
-
-
       </q-toolbar>
     </q-header>
 
@@ -55,7 +58,6 @@
     >
       <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
         <q-list padding>
-
           <router-link to="/mainlayout">
             <q-item clickable v-ripple>
               <q-item-section avatar>
@@ -105,22 +107,15 @@
 
           <router-link to="studentinfopage">
             <q-item clickable v-ripple>
-              <q-item-section>
-                班级管理
-              </q-item-section>
+              <q-item-section> 班级管理 </q-item-section>
             </q-item>
           </router-link>
 
           <router-link to="examplepage">
             <q-item clickable v-ripple>
-              <q-item-section>
-                建筑图纸
-              </q-item-section>
+              <q-item-section> 建筑图纸 </q-item-section>
             </q-item>
           </router-link>
-
-
-
         </q-list>
       </q-scroll-area>
     </q-drawer>
@@ -140,10 +135,10 @@
 </template>
 
 <script setup>
-import {useRouter} from "vue-router";
-import {ref, watch} from "vue";
-import {useQuasar} from "quasar";
-import {useAuthStore} from "stores/auth";
+import { useRouter } from "vue-router";
+import { ref, watch } from "vue";
+import { useQuasar } from "quasar";
+import { useAuthStore } from "stores/auth";
 import axios from "axios";
 
 const $q = useQuasar();
@@ -214,7 +209,9 @@ watch(model, (newValue, oldValue) => {
 /*---------------------*/
 /*退出登录*/
 const logout = () => {
-  const response = axios.get("https://smooth-werewolf-rich.ngrok-free.app/api/logout");
+  const response = axios.get(
+    "https://smooth-werewolf-rich.ngrok-free.app/api/logout",
+  );
   authStore.logout();
   $q.notify({
     message: "退出登录成功",

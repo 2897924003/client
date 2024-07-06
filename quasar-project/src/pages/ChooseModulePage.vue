@@ -1,5 +1,4 @@
 <template>
-
   <q-page class="flex flex-center">
     <img
       alt="EMT"
@@ -13,14 +12,10 @@
     ></q-img>
 
     <q-btn @click="hello">测试按钮</q-btn>
-
   </q-page>
 </template>
 
-<script setup>
-
-
-</script>
+<script setup></script>
 
 <style lang="sass" scoped>
 .my-card

@@ -1,129 +1,125 @@
 <template>
   <q-layout class="row justify-center">
     <q-page class="bg-accent">
-    <div class="q-pa-md" style="width: 100%; height: 100%">
-      <q-table
-        grid
-        card-class="bg-amber-5 text-purple"
-
-        color="red"
-        title="班级学生信息"
-        :rows="rows"
-        :columns="columns"
-        row-key="id"
-        selection="multiple"
-        :selected-rows-label="getSelectedString"
-        v-model:selected="selected"
-        :loading="loading"
-        :filter="filter"
-        v-model:pagination="pagination"
-        @request="getInfos"
-        no-data-label="没有指定数据"
-        no-results-label="没有匹配数据"
-        @row-click="openRowOfStudentInfoDialog"
-
-
-      >
-        <template v-slot:pagination="scope" >
-          <q-btn
-            v-if="scope.pagesNumber > 2"
-            icon="first_page"
-            color="grey-8"
-            round
-            dense
-            flat
-            :disable="scope.isFirstPage"
-            @click="scope.firstPage"
-          />
-          <q-btn
-            icon="chevron_left"
-            color="grey-8"
-            round
-            dense
-            flat
-            :disable="scope.isFirstPage"
-            @click="scope.prevPage"
-          />
-          <q-btn
-            icon="chevron_right"
-            color="grey-8"
-            round
-            dense
-            flat
-            :disable="scope.isLastPage"
-            @click="scope.nextPage"
-          />
-          <q-btn
-            v-if="scope.pagesNumber > 2"
-            icon="last_page"
-            color="grey-8"
-            round
-            dense
-            flat
-            :disable="scope.isLastPage"
-            @click="scope.lastPage"
-          />
-        </template>
-
-        <!-- 搜索框 -->
-        <template v-slot:top >
-          <div class="row  q-gutter-lg">
+      <div class="q-pa-md" style="width: 100%; height: 100%">
+        <q-table
+          grid
+          card-class="bg-amber-5 text-purple"
+          color="red"
+          title="班级学生信息"
+          :rows="rows"
+          :columns="columns"
+          row-key="id"
+          selection="multiple"
+          :selected-rows-label="getSelectedString"
+          v-model:selected="selected"
+          :loading="loading"
+          :filter="filter"
+          v-model:pagination="pagination"
+          @request="getInfos"
+          no-data-label="没有指定数据"
+          no-results-label="没有匹配数据"
+          @row-click="openRowOfStudentInfoDialog"
+        >
+          <template v-slot:pagination="scope">
             <q-btn
-              color="primary"
-              label="新增学生"
-              @click="openAddStudentDialog"
-            />
-            <q-btn
-              color="primary"
-              label="删除学生"
-              @click="deleteStudent"
-            />
-
-            <q-btn
-              color="primary"
-              icon-right="archive"
-              label="Export to csv"
-              no-caps
-              @click="exportTable"
-            />
-            <q-input
-              borderless
+              v-if="scope.pagesNumber > 2"
+              icon="first_page"
+              color="grey-8"
+              round
               dense
-              debounce="800"
-              v-model="filter"
-              placeholder="搜索..."
-            >
-              <template v-slot:append>
-                <q-icon name="search" />
-              </template>
-            </q-input>
-          </div>
+              flat
+              :disable="scope.isFirstPage"
+              @click="scope.firstPage"
+            />
+            <q-btn
+              icon="chevron_left"
+              color="grey-8"
+              round
+              dense
+              flat
+              :disable="scope.isFirstPage"
+              @click="scope.prevPage"
+            />
+            <q-btn
+              icon="chevron_right"
+              color="grey-8"
+              round
+              dense
+              flat
+              :disable="scope.isLastPage"
+              @click="scope.nextPage"
+            />
+            <q-btn
+              v-if="scope.pagesNumber > 2"
+              icon="last_page"
+              color="grey-8"
+              round
+              dense
+              flat
+              :disable="scope.isLastPage"
+              @click="scope.lastPage"
+            />
+          </template>
 
-        </template>
+          <!-- 搜索框 -->
+          <template v-slot:top>
+            <div class="row q-gutter-lg">
+              <q-btn
+                color="primary"
+                label="新增学生"
+                @click="openAddStudentDialog"
+              />
+              <q-btn color="primary" label="删除学生" @click="deleteStudent" />
 
-        <!-- 未搜索到的信息显示 -->
-        <template v-slot:no-data="{ icon, message, filter }">
-          <div class="full-width row flex-center text-accent q-gutter-sm">
-            <q-icon size="2em" name="sentiment_dissatisfied" />
-            <span> Well this is sad... {{ message }} </span>
-            <q-icon size="2em" :name="filter ? 'filter_b_and_w' : icon" />
-          </div>
-        </template>
+              <q-btn
+                color="primary"
+                icon-right="archive"
+                label="Export to csv"
+                no-caps
+                @click="exportTable"
+              />
+              <q-input
+                borderless
+                dense
+                debounce="800"
+                v-model="filter"
+                placeholder="搜索..."
+              >
+                <template v-slot:append>
+                  <q-icon name="search" />
+                </template>
+              </q-input>
+            </div>
+          </template>
 
-        <!-- 修改学生信息 -->
+          <!-- 未搜索到的信息显示 -->
+          <template v-slot:no-data="{ icon, message, filter }">
+            <div class="full-width row flex-center text-accent q-gutter-sm">
+              <q-icon size="2em" name="sentiment_dissatisfied" />
+              <span> Well this is sad... {{ message }} </span>
+              <q-icon size="2em" :name="filter ? 'filter_b_and_w' : icon" />
+            </div>
+          </template>
 
-      </q-table>
-
-    </div>
-      <q-dialog v-model="rowDialog" >
+          <!-- 修改学生信息 -->
+        </q-table>
+      </div>
+      <q-dialog v-model="rowDialog">
         <q-card>
           <q-card-section>
-            <div class="text-h6">{{ isEditing ? '修改学生信息' : '添加学生' }}</div>
+            <div class="text-h6">
+              {{ isEditing ? "修改学生信息" : "添加学生" }}
+            </div>
           </q-card-section>
-          <q-separator/>
+          <q-separator />
           <q-card-section>
-
-            <q-input clearable :readonly="isEditing" v-model="rowDetails.id" label="id" />
+            <q-input
+              clearable
+              :readonly="isEditing"
+              v-model="rowDetails.id"
+              label="id"
+            />
             <q-input clearable v-model="rowDetails.dormitory" label="寝室号" />
             <q-input clearable v-model="rowDetails.name" label="姓名" />
             <q-input
@@ -132,20 +128,27 @@
               v-model="rowDetails.phone"
               label="电话"
               mask=""
-              :rules="[val => /^(?:1[3-9])\d{9}$/.test(val) || '请输入有效的中国手机号']"
+              :rules="[
+                (val) =>
+                  /^(?:1[3-9])\d{9}$/.test(val) || '请输入有效的中国手机号',
+              ]"
             >
               <template v-slot:prepend>
                 <q-avatar>
                   <q-img fit="cover" src="/icons/china1.png" />
                 </q-avatar>
-
               </template>
             </q-input>
             <!-- Add more fields as needed -->
           </q-card-section>
-          <q-card-actions  align="right">
+          <q-card-actions align="right">
             <q-btn flat label="返回" color="primary" v-close-popup />
-            <q-btn flat label="确认" color="primary" @click="isEditing ? updateStudentInfo() : addStudent()" />
+            <q-btn
+              flat
+              label="确认"
+              color="primary"
+              @click="isEditing ? updateStudentInfo() : addStudent()"
+            />
           </q-card-actions>
         </q-card>
       </q-dialog>
@@ -156,7 +159,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import axios from "axios";
-import {exportFile, useQuasar} from "quasar";
+import { exportFile, useQuasar } from "quasar";
 const $q = useQuasar();
 
 // 定义学生信息表格列
@@ -203,7 +206,7 @@ const filter = ref("");
 const loading = ref(false);
 const rowDialog = ref(false);
 const isEditing = ref(false);
-const rowDetails = ref({id:null,dormitory:null, name:null, phone:null});
+const rowDetails = ref({ id: null, dormitory: null, name: null, phone: null });
 const pagination = ref({
   sortBy: "desc",
   descending: false,
@@ -216,34 +219,39 @@ const pagination = ref({
 const wrapCsvValue = (val, formatFn, row) => {
   let formatted = formatFn !== void 0 ? formatFn(val, row) : val;
 
-  formatted = formatted === void 0 || formatted === null ? "" : String(formatted);
+  formatted =
+    formatted === void 0 || formatted === null ? "" : String(formatted);
 
   // Replace double quotes with two double quotes to escape them
   formatted = formatted.split('"').join('""');
 
   // Wrap the field with double quotes if it contains a comma, newline, or double quote
-  return formatted.indexOf(',') > -1 || formatted.indexOf('\n') > -1 || formatted.indexOf('"') > -1
+  return formatted.indexOf(",") > -1 ||
+    formatted.indexOf("\n") > -1 ||
+    formatted.indexOf('"') > -1
     ? `"${formatted}"`
     : formatted;
 };
 /*导出表格*/
 const exportTable = () => {
   // naive encoding to csv format
-  const content = [columns.map((col) => wrapCsvValue(col.label))].concat(
-    rows.value.map((row) =>
-      columns
-        .map((col) =>
-          wrapCsvValue(
-            typeof col.field === "function"
-              ? col.field(row)
-              : row[col.field === void 0 ? col.name : col.field],
-            col.format,
-            row
+  const content = [columns.map((col) => wrapCsvValue(col.label))]
+    .concat(
+      rows.value.map((row) =>
+        columns
+          .map((col) =>
+            wrapCsvValue(
+              typeof col.field === "function"
+                ? col.field(row)
+                : row[col.field === void 0 ? col.name : col.field],
+              col.format,
+              row,
+            ),
           )
-        )
-        .join(",")
+          .join(","),
+      ),
     )
-  ).join("\r\n");
+    .join("\r\n");
 
   const status = exportFile("学生信息.csv", content, "text/csv");
   if (status !== true) {
@@ -259,10 +267,10 @@ const exportTable = () => {
 const fetchFromServer = async () => {
   try {
     const response = await axios.get(
-      "https://test.opensun.asia/api/class/student_infos",
+      "/api/class/student_infos",
       {
         headers: { Authorization: sessionStorage.getItem("jwt") },
-      }
+      },
     );
 
     // 成功将响应的数据接收
@@ -285,7 +293,8 @@ const getInfos = async (props) => {
   loading.value = true;
 
   // 需要查询的条数
-  const fetchCount = rowsPerPage === 0 ? pagination.value.rowsNumber : rowsPerPage;
+  const fetchCount =
+    rowsPerPage === 0 ? pagination.value.rowsNumber : rowsPerPage;
 
   // calculate starting row of data
   const startRow = (page - 1) * rowsPerPage;
@@ -337,8 +346,8 @@ const getSelectedString = () => {
   return selected.value.length === 0
     ? ""
     : `${selected.value.length} record${
-      selected.value.length > 1 ? "s" : ""
-    } selected of ${rows.value.length}`;
+        selected.value.length > 1 ? "s" : ""
+      } selected of ${rows.value.length}`;
 };
 
 /*修改学生模式*/
@@ -359,7 +368,10 @@ const openAddStudentDialog = () => {
 /*修改学生信息*/
 const updateStudentInfo = async () => {
   try {
-    const response = await axios.post("https://test.opensun.asia/api/class/update_student_info", rowDetails.value);
+    const response = await axios.post(
+      "https://test.opensun.asia/api/class/update_student_info",
+      rowDetails.value,
+    );
     if (response.status === 200) {
       await getInfos({
         pagination: pagination.value,
@@ -389,15 +401,16 @@ const updateStudentInfo = async () => {
 
 /*增加学生*/
 const addStudent = async () => {
-
   try {
-    const response = await axios.post("https://test.opensun.asia/api/class/add_student", rowDetails.value);
+    const response = await axios.post(
+      "https://test.opensun.asia/api/class/add_student",
+      rowDetails.value,
+    );
     if (response.status === 200) {
       await getInfos({
         pagination: pagination.value,
         filter: undefined,
-      }
-      );
+      });
       rowDialog.value = false;
       $q.notify({
         message: "添加成功",
@@ -405,46 +418,42 @@ const addStudent = async () => {
         avatar: "https://cdn.quasar.dev/img/boy-avatar.png",
       });
     }
-  }
-  catch (error) {
+  } catch (error) {
     $q.notify({
       message: "添加失败",
       position: "top",
       avatar: "https://cdn.quasar.dev/img/boy-avatar.png",
     });
   }
-
-}
+};
 /*删除学生*/
 const deleteStudent = async () => {
-
   try {
-    const response = await axios.post("https://test.opensun.asia/api/class/delete_student", selected.value.map(student => student.id));
+    const response = await axios.post(
+      "https://test.opensun.asia/api/class/delete_student",
+      selected.value.map((student) => student.id),
+    );
     if (response.status === 200) {
       selected.value = [];
       await getInfos({
-          pagination: pagination.value,
-          filter: undefined,
-        }
-      );
+        pagination: pagination.value,
+        filter: undefined,
+      });
       rowDialog.value = false;
       $q.notify({
         message: "删除成功",
         position: "top",
         avatar: "https://cdn.quasar.dev/img/boy-avatar.png",
       });
-
     }
-  }
-  catch (error) {
+  } catch (error) {
     $q.notify({
       message: "删除失败",
       position: "top",
       avatar: "https://cdn.quasar.dev/img/boy-avatar.png",
     });
   }
-
-}
+};
 /*查询学生详细信息*/
 </script>
 

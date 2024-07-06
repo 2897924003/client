@@ -1,0 +1,35 @@
+{
+  "name": "quasar-project",
+  "version": "0.0.1",
+  "description": "我的第一个前端项目",
+  "author": "GJQHR <2897924003@qq.com>",
+  "private": true,
+  "type": "module",
+  "module": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@quasar/extras": "1.16.11",
+    "axios": "1.6.8",
+    "compression": "^1.7.4",
+    "express": "^4.17.3",
+    "http-proxy-middleware": "3.0.0",
+    "layouts": "3.0.2",
+    "pinia": "2.1.7",
+    "quasar": "2.15.2",
+    "quasar-project": "0.0.1",
+    "vue": "3.4.21",
+    "vue-i18n": "9.12.1",
+    "vue-router": "4.3.0",
+    "serialize-javascript": "^6.0.2"
+  },
+  "engines": {
+    "node": "^24 || ^22 || ^20 || ^18",
+    "npm": ">= 6.13.4",
+    "yarn": ">= 1.21.1"
+  },
+  "quasar": {
+    "ssr": true
+  }
+}
